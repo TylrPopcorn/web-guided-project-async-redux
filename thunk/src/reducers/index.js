@@ -1,3 +1,5 @@
+import { FETCH_FAIL, FETCH_START, FETCH_SUCCESS } from "./../actions/index"
+
 const initialState = {
   person: {
     name: {
@@ -17,6 +19,27 @@ const initialState = {
 
 export const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case "FETCH_START":
+      return {
+        ...state,
+        person: {},
+        isFetching: true,
+        error: '',
+      }
+    case "FETCH_FAIL":
+      return ({
+        ...state,
+        person: {},
+        isFetching: false,
+        error: action.payload,
+      })
+    case "FETCH_SUCESS":
+      return ({
+        ...state,
+        person: action.payload,
+        isFetching: false,
+        error: '',
+      })
     default:
       return state;
   }
